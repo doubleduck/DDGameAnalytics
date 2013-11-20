@@ -4,8 +4,9 @@ DDGameAnalytics
 OpenFL extension for the GameAnalytics service. <br>
 Supported platforms:
 - iOS/Android - Native extensions
-- Flash uses an AS3toHaxe version of the official GameAnalytics AS3 API. <b>credited to</b> https://github.com/lordkryss/gameanalytics-haxe
-- Other platforms should work but not tested. 
+- Flash uses an AS3toHaxe version of the official GameAnalytics AS3 API. <br><b>credited to</b> https://github.com/lordkryss/gameanalytics-haxe
+- Other platforms should work but not tested. </br>
+
 Setup
 ------
 
