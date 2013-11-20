@@ -11,7 +11,7 @@ Setup
 ------
 
 1. clone this repository to a directory of your choice
-2. ```haxelib dev ddgameanalytics <clone_location>```
+2. include the repository in your project: ```<include path = "CLONE-PATH/include.xml"/>```
 3. Android only, add the following to project.xml: <br>
 ```<setenv name="GameAnalyticsId" value="YOUR-APP-ID" if="android" />```
 ```<setenv name="GameAnalyticsSecret" value="YOUR-APP-SECRET" if="android" />```
