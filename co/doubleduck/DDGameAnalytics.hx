@@ -20,6 +20,12 @@ import gameanalytics.GameAnalytics;
 	static var sendQualityEvent:Dynamic;
 	static var sendUserEvent:Dynamic;
 	#end
+
+	#if ios
+	#elseif android
+	#else
+	static public var defaultUserId:String = "desktopUser";
+	#end
 	
 	public static function designEvent(eventId:String, eventValue:Float, area:String):Void{
 		#if android
@@ -67,7 +73,7 @@ import gameanalytics.GameAnalytics;
 		
 		#else
 			GameAnalytics.DEBUG_MODE = true;
-			GameAnalytics.init(appID, appSecret, version, "desktopUser");
+			GameAnalytics.init(appID, appSecret, version, defaultUserId);
 			GameAnalytics.newEvent(EventCategory.USER, {platform: "desktop"});
 		#end
 	}
