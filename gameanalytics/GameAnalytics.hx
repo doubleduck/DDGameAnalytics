@@ -21,7 +21,7 @@ class GameAnalytics {
 	static var REQUIRED_FIELDS_USER : Array<Dynamic> = ["user_id", "session_id", "build"];
 	static var REQUIRED_FIELDS_DESIGN : Array<Dynamic> = ["user_id", "session_id", "build", "event_id"];
 	static var REQUIRED_FIELDS_BUSINESS : Array<Dynamic> = ["user_id", "session_id", "build", "event_id", "amount", "currency"];
-	static var REQUIRED_FIELDS_QUALITY : Array<Dynamic> = ["user_id", "session_id", "build", "event_id"];
+	static var REQUIRED_FIELDS_ERROR : Array<Dynamic> = ["user_id", "session_id", "build", "message", "severity"];
 	//public static const URL:String = "http://logging.gameanalytics.com";
 	static public var URL : String = "http://api.gameanalytics.com";
 	static public var PORT : Int = 80;
@@ -84,7 +84,7 @@ class GameAnalytics {
 
 	 * Send a new event to Game Analytics.
 
-	 * @param category:String - the category of the event. Either user, design, business or quality
+	 * @param category:String - the category of the event. Either user, design, business or error
 
 	 * @param ...events - Any number of events to send.
 
@@ -95,7 +95,7 @@ class GameAnalytics {
 			return;
 		}
 		
-		if(category != EventCategory.USER && category != EventCategory.DESIGN && category != EventCategory.BUSINESS && category != EventCategory.QUALITY) throw new GameAnalyticsError("Event category type '" + category + "' not recognized. Valid types are: " + [EventCategory.USER, EventCategory.DESIGN, EventCategory.BUSINESS, EventCategory.QUALITY]);
+		if(category != EventCategory.USER && category != EventCategory.DESIGN && category != EventCategory.BUSINESS && category != EventCategory.ERROR) throw new GameAnalyticsError("Event category type '" + category + "' not recognized. Valid types are: " + [EventCategory.USER, EventCategory.DESIGN, EventCategory.BUSINESS, EventCategory.ERROR]);
 		if(events.length == 0) events = [{ }];
 		var req_fields : Array<Dynamic> = getRequiredFields(category);
 		var event : Dynamic = events;
@@ -176,8 +176,8 @@ class GameAnalytics {
 			return REQUIRED_FIELDS_DESIGN;
 		case EventCategory.BUSINESS:
 			return REQUIRED_FIELDS_BUSINESS;
-		case EventCategory.QUALITY:
-			return REQUIRED_FIELDS_QUALITY;
+		case EventCategory.ERROR:
+			return REQUIRED_FIELDS_ERROR;
 		default:
 			throw new GameAnalyticsError("No such category: " + category);
 			return [];

@@ -13,12 +13,12 @@ import gameanalytics.GameAnalytics;
 
 @:allow(co.doubleduck.DDGameAnalytics) class DDGameAnalytics 
 {
+	
 	// Android JNI Handlers
 	#if android
 	static var jni_design_event:Dynamic;
 	static var jni_business_event:Dynamic;
-	static var sendQualityEvent:Dynamic;
-	static var sendUserEvent:Dynamic;
+	static var jni_error_event:Dynamic;
 	#end
 
 	#if ios
@@ -27,7 +27,7 @@ import gameanalytics.GameAnalytics;
 	static public var defaultUserId:String = "desktopUser";
 	#end
 	
-	public static function designEvent(eventId:String, eventValue:Float, area:String):Void{
+	public static function designEvent(eventId:String, eventValue:Float, area:String = ""):Void{
 		#if android
 			if (jni_design_event== null) {
 
@@ -46,7 +46,7 @@ import gameanalytics.GameAnalytics;
 
 	}
 
-	public static function businessEvent(eventId:String, currency:String, amount:Int, area:String):Void{
+	public static function businessEvent(eventId:String, currency:String, amount:Int, area:String = ""):Void{
 		#if android
 			if (jni_business_event== null) {
 
@@ -55,13 +55,27 @@ import gameanalytics.GameAnalytics;
 			}
 			jni_business_event(eventId, currency, amount, area);
 		#elseif ios
-			//ga_business_event(eventId, currency, amount, area);
+			ga_business_event(eventId, currency, amount, area);
 		#else
 
 			GameAnalytics.newEvent(EventCategory.BUSINESS, {event_id: eventId, currency: currency, amount: amount, area: area});
 
 		#end
 
+	}
+	
+	public static function errorEvent(message:String, severity:String, area:String = ""):Void {
+		#if android
+			if (jni_error_event == null) {
+				jni_error_event = JNI.createStaticMethod ("co/doubleduck/extensions/GameAnalyticsExt", "errorEvent", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
+			}
+			jni_error_event(message, severity, area);
+			
+		#elseif ios
+			//ga_error_event(message, severity, area);
+		#else
+			GameAnalytics.newEvent(EventCategory.ERROR, { severity: severity, message:message, area:area } );
+		#end
 	}
 
 	
@@ -81,7 +95,8 @@ import gameanalytics.GameAnalytics;
 	
 	#if ios
 	static var ga_init            = Lib.load("ddgameanalytics","ga_init",3);
-	static var ga_design_event    = Lib.load("ddgameanalytics","ga_design_event",3);
+	static var ga_design_event    = Lib.load("ddgameanalytics", "ga_design_event", 3);
+	//static var ga_error_event     = Lib.load("ddgameanalytics", "ga_error_event", 3);
 	//static var ga_business_event  = Lib.load("ddgameanalytics","ga_business_event", 4);
 	#end
 	

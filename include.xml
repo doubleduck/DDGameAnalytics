@@ -15,7 +15,7 @@
 		<dependency name="ddgameanalytics" path="dependencies/android"/>
 		<android extension="co.doubleduck.extensions.GameAnalyticsExt" />
 		<template path="dependencies/android/src/co/doubleduck/extensions/util/gson-2.2.2.jar" rename="deps/ddgameanalytics/libs/gson-2.2.2.jar"/>
-		<template path="dependencies/android/src/co/doubleduck/extensions/util/game-analytics-wrapper-v1.10.jar" rename="deps/ddgameanalytics/libs/game-analytics-wrapper-v1.10.jar"/>
+		<template path="dependencies/android/src/co/doubleduck/extensions/util/game-analytics-wrapper-v1.11.jar" rename="deps/ddgameanalytics/libs/game-analytics-wrapper-v1.11.jar"/>
 
 	</section>
 </project>
