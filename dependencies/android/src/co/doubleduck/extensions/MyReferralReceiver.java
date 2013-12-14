@@ -1,4 +1,4 @@
-package co.doubleduck.extensions;
+package ::APP_PACKAGE::;
 
 import com.gameanalytics.android.ReferralReceiver;
 import com.gameanalytics.android.GameAnalytics;

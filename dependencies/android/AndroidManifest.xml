@@ -5,13 +5,5 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-	        <!-- FOR AUTOMATIC REFERRAL RECEIVER -->
-        <receiver
-                android:name="co.doubleduck.extensions.MyReferralReceiver"
-                android:exported="true" >
-            <intent-filter >
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-            </intent-filter>
-        </receiver>
 
 </manifest>
