@@ -27,7 +27,7 @@ namespace ddgameanalytics
 		NSString *event_message = [[NSString alloc] initWithUTF8String:message];
 		NSString *event_severity = [[NSString alloc] initWithUTF8String:severity];
 		NSString *event_area = [[NSString alloc] initWithUTF8String:area];
-		[GameAnalytics logQualityAssuranceDataEvent:event_severity withParams:@{@"area" : event_area, @"message" : event_message}];
+		[GameAnalytics logQualityAssuranceDataEvent:event_message withParams:@{@"area" : event_area, @"message" : event_message}];
 	}
 
 	void gaBusinessEvent(const char *eventId, const char *currency, int amount, const char *area) {
