@@ -12,25 +12,35 @@ public class GameAnalyticsExt extends Extension
 {
         private static String appID = "::ENV_GameAnalyticsId::"; 
         private static String appSecret = "::ENV_GameAnalyticsSecret::"; 
+        private static int inited = 0;
         
         
         @Override public void onCreate (Bundle savedInstanceState)
         {
-			    GameAnalytics.setDebugLogLevel(GameAnalytics.VERBOSE);
-                GameAnalytics.initialise(Extension.mainActivity, appSecret, appID);
+			   
         }
         
 
         @Override
         public void onResume() {
             super.onResume();
-            GameAnalytics.startSession(Extension.mainActivity);
+            if (inited == 1) {
+              GameAnalytics.startSession(Extension.mainActivity);  
+            }
+            
         }
 
         @Override
         public void onPause() {
             super.onPause();
             GameAnalytics.stopSession();
+        }
+
+        public static void initGA(String appID, String appSecret, String build) {
+                GameAnalytics.setDebugLogLevel(GameAnalytics.VERBOSE);
+                GameAnalytics.initialise(Extension.mainActivity, appSecret, appID, build);
+                GameAnalytics.startSession(Extension.mainActivity);
+                inited = 1;
         }
 
         public static void designEvent(String eventId, float value, String area){

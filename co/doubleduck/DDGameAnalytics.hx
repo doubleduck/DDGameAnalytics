@@ -16,6 +16,7 @@ import gameanalytics.GameAnalytics;
 	
 	// Android JNI Handlers
 	#if android
+	static var jni_init_event:Dynamic;
 	static var jni_design_event:Dynamic;
 	static var jni_business_event:Dynamic;
 	static var jni_error_event:Dynamic;
@@ -85,7 +86,10 @@ import gameanalytics.GameAnalytics;
 		#if ios
 		ga_init(appID, appSecret, version);
 		#elseif android
-		
+			if (jni_init_event == null) {
+				jni_init_event = JNI.createStaticMethod ("co/doubleduck/extensions/GameAnalyticsExt", "initGA", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
+			}
+			jni_init_event(appID, appSecret, version);
 		#else
 			GameAnalytics.DEBUG_MODE = true;
 			GameAnalytics.init(appID, appSecret, version, defaultUserId);
