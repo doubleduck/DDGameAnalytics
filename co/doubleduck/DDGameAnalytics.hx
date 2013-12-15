@@ -55,6 +55,7 @@ import gameanalytics.GameAnalytics;
 			}
 			jni_business_event(eventId, currency, amount, area);
 		#elseif ios
+			trace("ios business event: id = " + eventId + " currency = " + currency + " amount = " + amount);
 			ga_business_event(eventId, currency, amount, area);
 		#else
 
@@ -72,7 +73,7 @@ import gameanalytics.GameAnalytics;
 			jni_error_event(message, severity, area);
 			
 		#elseif ios
-			//ga_error_event(message, severity, area);
+			ga_error_event(message, severity, area);
 		#else
 			GameAnalytics.newEvent(EventCategory.ERROR, { severity: severity, message:message, area:area } );
 		#end
@@ -96,8 +97,8 @@ import gameanalytics.GameAnalytics;
 	#if ios
 	static var ga_init            = Lib.load("ddgameanalytics","ga_init",3);
 	static var ga_design_event    = Lib.load("ddgameanalytics", "ga_design_event", 3);
-	//static var ga_error_event     = Lib.load("ddgameanalytics", "ga_error_event", 3);
-	//static var ga_business_event  = Lib.load("ddgameanalytics","ga_business_event", 4);
+	static var ga_error_event     = Lib.load("ddgameanalytics", "ga_error_event", 3);
+	static var ga_business_event  = Lib.load("ddgameanalytics","ga_business_event", 4);
 	#end
 	
 	

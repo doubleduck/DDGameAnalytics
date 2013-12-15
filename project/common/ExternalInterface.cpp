@@ -29,6 +29,13 @@ value ga_design_event(value id, value eventValue, value area)
 }
 DEFINE_PRIM(ga_design_event, 3);
 
+value ga_error_event(value message, value severity, value area)
+{
+    gaErrorEvent(val_string(message), val_string(severity), val_string(area));
+    return alloc_null();
+}
+DEFINE_PRIM(ga_error_event, 3);
+
 value ga_business_event(value id, value currency, value amount, value area)
 {
     gaBusinessEvent(val_string(id), val_string(currency), val_int(amount), val_string(area));
