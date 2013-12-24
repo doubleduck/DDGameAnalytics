@@ -37,7 +37,7 @@ public class GameAnalyticsExt extends Extension
         }
 
         public static void initGA(String appID, String appSecret, String build) {
-                GameAnalytics.setDebugLogLevel(GameAnalytics.VERBOSE);
+                GameAnalytics.setDebugLogLevel(GameAnalytics.RELEASE);
                 GameAnalytics.initialise(Extension.mainActivity, appSecret, appID, build);
                 GameAnalytics.startSession(Extension.mainActivity);
                 inited = 1;

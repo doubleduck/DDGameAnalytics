@@ -17,6 +17,6 @@ public class MyReferralReceiver extends ReferralReceiver {
 
     @Override
     public int getDebugMode() {
-        return GameAnalytics.VERBOSE;
+        return GameAnalytics.RELEASE;
     }
 }
