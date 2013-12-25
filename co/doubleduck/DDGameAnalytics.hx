@@ -81,7 +81,7 @@ import gameanalytics.GameAnalytics;
 	}
 
 	
-	public static function init(appID:String, appSecret:String, version:String = "1.0")
+	public static function init(appID:String, appSecret:String, version:String = "1.0", platform:String = "desktop")
 	{
 		#if ios
 		ga_init(appID, appSecret, version);
@@ -93,7 +93,7 @@ import gameanalytics.GameAnalytics;
 		#else
 			GameAnalytics.DEBUG_MODE = true;
 			GameAnalytics.init(appID, appSecret, version, defaultUserId);
-			GameAnalytics.newEvent(EventCategory.USER, {platform: "desktop"});
+			GameAnalytics.newEvent(EventCategory.USER, {platform: platform});
 		#end
 	}
 
