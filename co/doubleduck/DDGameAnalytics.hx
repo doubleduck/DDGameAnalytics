@@ -27,8 +27,12 @@ import gameanalytics.GameAnalytics;
 	#else
 	static public var defaultUserId:String = "desktopUser";
 	#end
-	
+	static public var enabled:Bool = true;
+
 	public static function designEvent(eventId:String, eventValue:Float, area:String = ""):Void{
+		if (!enabled) {
+			return;
+		}
 		#if android
 			if (jni_design_event== null) {
 
@@ -48,6 +52,9 @@ import gameanalytics.GameAnalytics;
 	}
 
 	public static function businessEvent(eventId:String, currency:String, amount:Int, area:String = ""):Void{
+		if (!enabled) {
+			return;
+		}
 		#if android
 			if (jni_business_event== null) {
 
@@ -67,6 +74,9 @@ import gameanalytics.GameAnalytics;
 	}
 	
 	public static function errorEvent(message:String, severity:String, area:String = ""):Void {
+		if (!enabled) {
+			return;
+		}
 		#if android
 			if (jni_error_event == null) {
 				jni_error_event = JNI.createStaticMethod ("co/doubleduck/extensions/GameAnalyticsExt", "errorEvent", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
@@ -81,8 +91,10 @@ import gameanalytics.GameAnalytics;
 	}
 
 	
-	public static function init(appID:String, appSecret:String, version:String = "1.0")
-	{
+	public static function init(appID:String, appSecret:String, version:String = "1.0", platform:String = "desktop") {
+		if (!enabled) {
+			return;
+		}
 		#if ios
 		ga_init(appID, appSecret, version);
 		#elseif android
@@ -93,7 +105,7 @@ import gameanalytics.GameAnalytics;
 		#else
 			GameAnalytics.DEBUG_MODE = true;
 			GameAnalytics.init(appID, appSecret, version, defaultUserId);
-			GameAnalytics.newEvent(EventCategory.USER, {platform: "desktop"});
+			GameAnalytics.newEvent(EventCategory.USER, {platform: platform});
 		#end
 	}
 
