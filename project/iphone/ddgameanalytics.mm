@@ -13,7 +13,7 @@ namespace ddgameanalytics
 		NSString *appid = [[NSString alloc] initWithUTF8String:appId];
 		NSString *signature = [[NSString alloc] initWithUTF8String:appSignature];
 		NSString *version = [[NSString alloc] initWithUTF8String:appVersion];
-		[GameAnalytics setDebugLogEnabled:true];
+		[GameAnalytics setDebugLogEnabled:false];
 		[GameAnalytics setGameKey:appid secretKey:signature build:version];
 	}
 	
