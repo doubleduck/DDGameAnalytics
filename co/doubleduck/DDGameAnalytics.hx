@@ -1,7 +1,7 @@
 package co.doubleduck;
 
 import flash.Lib;
-#if android
+#if (android && !amazon)
 import openfl.utils.JNI;
 #elseif ios
 
@@ -15,7 +15,7 @@ import gameanalytics.GameAnalytics;
 {
 	
 	// Android JNI Handlers
-	#if android
+	#if (android && !amazon)
 	static var jni_init_event:Dynamic;
 	static var jni_design_event:Dynamic;
 	static var jni_business_event:Dynamic;
@@ -23,7 +23,7 @@ import gameanalytics.GameAnalytics;
 	#end
 
 	#if ios
-	#elseif android
+	#elseif (android && !amazon) 
 	#else
 	static public var defaultUserId:String = "desktopUser";
 	#end
@@ -33,7 +33,7 @@ import gameanalytics.GameAnalytics;
 		if (!enabled) {
 			return;
 		}
-		#if android
+		#if (android && !amazon)
 			if (jni_design_event== null) {
 
 				jni_design_event = JNI.createStaticMethod ("co/doubleduck/extensions/GameAnalyticsExt", "designEvent", "(Ljava/lang/String;FLjava/lang/String;)V");
@@ -55,7 +55,7 @@ import gameanalytics.GameAnalytics;
 		if (!enabled) {
 			return;
 		}
-		#if android
+		#if (android && !amazon)
 			if (jni_business_event== null) {
 
 				jni_business_event = JNI.createStaticMethod ("co/doubleduck/extensions/GameAnalyticsExt", "businessEvent", "(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V");
@@ -77,7 +77,7 @@ import gameanalytics.GameAnalytics;
 		if (!enabled) {
 			return;
 		}
-		#if android
+		#if (android && !amazon)
 			if (jni_error_event == null) {
 				jni_error_event = JNI.createStaticMethod ("co/doubleduck/extensions/GameAnalyticsExt", "errorEvent", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
 			}
@@ -97,7 +97,7 @@ import gameanalytics.GameAnalytics;
 		}
 		#if ios
 		ga_init(appID, appSecret, version);
-		#elseif android
+		#elseif (android && !amazon)
 			if (jni_init_event == null) {
 				jni_init_event = JNI.createStaticMethod ("co/doubleduck/extensions/GameAnalyticsExt", "initGA", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
 			}

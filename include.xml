@@ -11,7 +11,7 @@
             <ios linker-flags="-v -fobjc-arc -force_load $SRCROOT/$PRODUCT_NAME/lib/$ARCHS/libGameAnalytics.a" />
 		</section>
 
-		<section if="android">
+		<section if="android" unless="amazon">
 		<dependency name="ddgameanalytics" path="dependencies/android"/>
 		<android extension="co.doubleduck.extensions.GameAnalyticsExt" />
 		<template path="dependencies/android/src/co/doubleduck/extensions/util/gson-2.2.2.jar" rename="deps/ddgameanalytics/libs/gson-2.2.2.jar"/>
