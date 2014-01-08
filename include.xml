@@ -8,7 +8,7 @@
 			<dependency name="SystemConfiguration.framework"/>
 			<dependency name="Foundation.framework" />
 			<dependency name="AdSupport.framework" />
-            <ios linker-flags="-v -fobjc-arc -force_load $SRCROOT/$PRODUCT_NAME/lib/$ARCHS/libGameAnalytics.a" />
+            <!--ios linker-flags="-v -fobjc-arc -force_load $SRCROOT/$PRODUCT_NAME/lib/$ARCHS/libGameAnalytics.a" /-->
 		</section>
 
 		<section if="android" unless="amazon">
