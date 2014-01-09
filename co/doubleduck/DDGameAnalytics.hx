@@ -63,7 +63,6 @@ import gameanalytics.GameAnalytics;
 			}
 			jni_business_event(eventId, currency, amount, area);
 		#elseif ios
-			trace("ios business event: id = " + eventId + " currency = " + currency + " amount = " + amount);
 			ga_business_event(eventId, currency, amount, area);
 		#else
 

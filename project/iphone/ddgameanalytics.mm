@@ -20,7 +20,15 @@ namespace ddgameanalytics
 	void gaDesignEvent(const char *eventId, float eventValue, const char *area) {
 		NSString *event_id = [[NSString alloc] initWithUTF8String:eventId];
 		NSString *event_area = [[NSString alloc] initWithUTF8String:area];
-		[GameAnalytics logGameDesignDataEvent:event_id withParams:@{@"area" : event_area, @"value" : [NSNumber numberWithFloat:eventValue]}];
+		NSString *userEvent = @"user";
+		if ([event_id isEqualToString:userEvent])
+		{
+			[GameAnalytics logUserDataWithParams:@{@"gender" : @"M", @"birth_year" : @1900, @"friend_count" : @10, @"platform" : @"iOS"}];
+		}
+		else {
+			[GameAnalytics logGameDesignDataEvent:event_id withParams:@{@"area" : event_area, @"value" : [NSNumber numberWithFloat:eventValue]}];
+		}
+		
 	}
 
 	void gaErrorEvent(const char *message, const char *severity, const char *area) {
